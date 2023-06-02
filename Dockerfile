@@ -30,10 +30,7 @@ RUN composer require laravel/passport
 RUN cp .env.example .env
 
 #generate laravel key
-RUN php artisan passport:install
-RUN php artisan config:clear
 RUN php artisan key:generate
-RUN php artisan config:clear
 
 RUN sudo chown www-data:www-data storage/oauth-*.key
 RUN chmod 600 storage/oauth-private.key
