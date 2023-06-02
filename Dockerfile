@@ -29,10 +29,12 @@ RUN composer install --no-dev --no-scripts --no-autoloader && \
 RUN cp .env.example .env
 
 #generate laravel key
-RUN php artisan key:generate
-
+RUN sudo chown www-data:www-data storage/oauth-*.key
 RUN php artisan passport:install
-RUN php artisan passport:keys --force
+RUN php artisan config:clear
+RUN php artisan key:generate
+RUN php artisan config:clear
+
 RUN chmod 600 storage/oauth-private.key
 RUN chmod 600 storage/oauth-public.key
 RUN ln -s /path/to/your/laravel/storage/app/oauth-private.key oauth-private.key
