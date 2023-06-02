@@ -25,16 +25,17 @@ COPY ./docker/apache2/vhost.conf /etc/apache2/sites-available/000-default.conf
 RUN composer install --no-dev --no-scripts --no-autoloader && \
     composer dump-autoload --optimize
 
+RUN composer require laravel/passport
 #cp .env.example .env
 RUN cp .env.example .env
 
 #generate laravel key
-RUN sudo chown www-data:www-data storage/oauth-*.key
 RUN php artisan passport:install
 RUN php artisan config:clear
 RUN php artisan key:generate
 RUN php artisan config:clear
 
+RUN sudo chown www-data:www-data storage/oauth-*.key
 RUN chmod 600 storage/oauth-private.key
 RUN chmod 600 storage/oauth-public.key
 RUN ln -s /path/to/your/laravel/storage/app/oauth-private.key oauth-private.key
