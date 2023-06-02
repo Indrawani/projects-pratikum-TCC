@@ -48,6 +48,7 @@ RUN chmod 777 /var/www/html
 
 #change environment database
 ENV APP_NAME=Restoran
+ENV APP_STORAGE=storage/app
 ENV DB_CONNECTION=mysql
 ENV DB_HOST=34.135.115.255
 ENV DB_DATABASE=restoranDb
