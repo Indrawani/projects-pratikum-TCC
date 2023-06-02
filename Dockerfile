@@ -31,9 +31,7 @@ RUN cp .env.example .env
 
 #generate laravel key
 RUN php artisan key:generate
-RUN php artisan migrate
-RUN php artisan passport:install --force
-RUN php artisan passport:client --personal
+RUN php artisan config:clear
 
 #link to storage
 RUN php artisan storage:link
@@ -50,6 +48,10 @@ ENV DB_HOST=34.135.115.255
 ENV DB_DATABASE=restoranDb
 ENV DB_USERNAME=restoran
 ENV DB_PASSWORD=restoran
+
+RUN php artisan migrate
+RUN php artisan passport:install --force
+RUN php artisan passport:client --personal
 
 #set permissions for storage and bootstrap/cache
 RUN chown -R www-data:www-data /var/www/html/storage
