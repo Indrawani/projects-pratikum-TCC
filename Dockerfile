@@ -32,7 +32,7 @@ RUN cp .env.example .env
 #generate laravel key
 RUN php artisan key:generate
 
-RUN sudo chown www-data:www-data storage/oauth-*.key
+RUN chown www-data:www-data storage/oauth-*.key
 RUN chmod 600 storage/oauth-private.key
 RUN chmod 600 storage/oauth-public.key
 RUN ln -s /path/to/your/laravel/storage/app/oauth-private.key oauth-private.key
