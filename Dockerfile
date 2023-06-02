@@ -31,6 +31,7 @@ RUN cp .env.example .env
 
 #generate laravel key
 RUN php artisan key:generate
+RUN php artisan passport:keys --force
 
 #link to storage
 RUN php artisan storage:link
