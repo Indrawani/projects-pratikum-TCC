@@ -31,6 +31,14 @@ RUN cp .env.example .env
 #generate laravel key
 RUN php artisan key:generate
 
+RUN php artisan passport:install
+RUN php artisan passport:keys --force
+RUN chmod 600 storage/oauth-private.key
+RUN chmod 600 storage/oauth-public.key
+RUN ln -s /path/to/your/laravel/storage/app/oauth-private.key oauth-private.key
+RUN ln -s /path/to/your/laravel/storage/app/oauth-public.key oauth-public.key
+
+
 #link to storage
 RUN php artisan storage:link
 
